@@ -28,8 +28,16 @@ class _HomePageState extends State<HomePage> {
             icon: SvgPicture.asset("assets/icons/menu.svg"), onPressed: null),
         title: RichText(
             text: TextSpan(children: [
-          TextSpan(text: "Punk", style: TextStyle(color: kPrimaryColor)),
-          TextSpan(text: "Food", style: TextStyle(color: kTextColor))
+          TextSpan(
+              text: "Punk",
+              style: TextStyle(
+                  color: kPrimaryColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700)),
+          TextSpan(
+              text: "Food",
+              style: TextStyle(
+                  color: kTextColor, fontSize: 20, fontWeight: FontWeight.w700))
         ])),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -37,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         onTap: (currentIndex) => {_pressTabIndex(currentIndex)},
         unselectedIconTheme: IconThemeData(color: Colors.black38),
-        selectedIconTheme: IconThemeData(color: kPrimaryColor),
+        selectedIconTheme: IconThemeData(color: kTabbarItemColor),
         showUnselectedLabels: false,
         showSelectedLabels: false,
         items: const <BottomNavigationBarItem>[
