@@ -18,13 +18,25 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   String _searchVal = '';
+  List menu;
+  List foodCards;
 
-  var menu = <Map>[
-    {'index': 0, 'text': 'Combo Meal', 'isActive': false},
-    {'index': 1, 'text': 'Chicken', 'isActive': false},
-    {'index': 2, 'text': 'Beverages', 'isActive': false},
-    {'index': 3, 'text': 'Snackes', 'isActive': false},
-  ];
+  @override
+  void initState() {
+    super.initState();
+    menu = <Map>[
+      {'index': 0, 'text': 'Combo Meal', 'isActive': true},
+      {'index': 1, 'text': 'Chicken', 'isActive': false},
+      {'index': 2, 'text': 'Beverages', 'isActive': false},
+      {'index': 3, 'text': 'Snackes', 'isActive': false},
+    ];
+    foodCards = [
+      {'title': 'Burger & Beer', 'subTitle': 'Macdonalds'},
+      {'title': 'Pizzer', 'subTitle': 'Pizzer Hut'},
+      {'title': 'Burger & Beer', 'subTitle': 'Macdonalds'},
+      {'title': 'Burger & Beer', 'subTitle': 'Macdonalds'},
+    ];
+  }
 
   void _pressTabIndex(int currentIndex) {
     setState(() {
@@ -34,6 +46,25 @@ class _HomePageState extends State<HomePage> {
 
   void _onChangeInputValue(String value) {
     print(value);
+  }
+
+  List<Widget> _createMenu() {
+    List<Widget> content = [];
+    for (var item in menu) {
+      content.add(MenuItem(isActive: item["isActive"], text: item["text"]));
+    }
+    return content;
+  }
+
+  List<Widget> _createFoodCard() {
+    List<Widget> content = [];
+    for (var item in foodCards) {
+      content.add(FoodCard(
+        title: item['title'],
+        subTitle: item['subTitle'],
+      ));
+    }
+    return content;
   }
 
   @override
@@ -94,48 +125,14 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MenuItem(
-                    text: 'Combo Meal',
-                    isActive: true,
-                  ),
-                  MenuItem(
-                    text: 'Chicken',
-                    isActive: false,
-                  ),
-                  MenuItem(
-                    text: 'Beverages',
-                    isActive: false,
-                  ),
-                  MenuItem(
-                    text: 'Snackes',
-                    isActive: false,
-                  ),
-                ],
+                children: _createMenu(),
               ),
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Row(
-                children: <Widget>[
-                  FoodCard(
-                    title: 'Burger & Beer',
-                    subTitle: 'Macdonalds',
-                  ),
-                  FoodCard(
-                    title: 'Burger & Beer',
-                    subTitle: 'Macdonalds',
-                  ),
-                  FoodCard(
-                    title: 'Burger & Beer',
-                    subTitle: 'Macdonalds',
-                  ),
-                  FoodCard(
-                    title: 'Burger & Beer',
-                    subTitle: 'Macdonalds',
-                  )
-                ],
+                children: _createFoodCard(),
               ),
             ),
             ADBanner(),
