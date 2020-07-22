@@ -15,7 +15,9 @@ class MenuItem extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                print(text);
+                RenderBox box = context.findRenderObject();
+                Offset offset = box.localToGlobal(Offset.zero);
+                print('${offset} ${context.size}');
               },
               child: Text.rich(TextSpan(
                   text: text,
